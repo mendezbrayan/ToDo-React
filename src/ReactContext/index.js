@@ -5,6 +5,7 @@ import React, { useState } from "react";
 const TodoContext = React.createContext();
 
 function TodoProvider({ children }) {
+  
   const [openModal, setOpenModal] = useState(false);
 
   const {
@@ -19,24 +20,28 @@ function TodoProvider({ children }) {
 
   const crear = (text) => {
     if (text === "") {
-      alert("Esta vacio");
+      setOpenModal(false)
     } else {
       const newTodos = [...todos];
-      newTodos.push({ text: text, completd: false, like: 0, id: cont + 1 });
+      newTodos.push({ text: text, completd: false, like: 0, id: cont + 1 ,guardar:false,editar:false});
       setOpenModal(false);
       saveCont(cont + 1);
       setText("");
       saveTodos(newTodos);
     }
   };
+
   const completarTodos = todos.filter((todo) => todo.completd).length;
 
   const [searchValue, setSearchvalue] = React.useState("");
+  const [valor,setValor] = useState('')
 
   const searchedTodos = todos.filter((e) => {
     const todoText = e.text.toLowerCase();
     const searchTodos = searchValue.toLowerCase();
+    
     return todoText.includes(searchTodos);
+
   });
 
   const completeTodo = (id) => {
@@ -73,12 +78,34 @@ function TodoProvider({ children }) {
   };
 
   const abrir = () => {
+
     setOpenModal(true);
   };
   const cerrar = () => {
     setText("");
+
     setOpenModal(false);
   };
+  const editar = (id,text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.id === id);
+   newTodos[todoIndex].editar = true
+   newTodos[todoIndex].guardar = true
+   setValor(text)
+
+    saveTodos(newTodos);
+
+  }
+  const guardar= (id) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.id === id);
+    newTodos[todoIndex].editar = false
+      newTodos[todoIndex].text = valor
+   
+ 
+
+    saveTodos(newTodos);
+  }
 
   return (
     <>
@@ -102,6 +129,10 @@ function TodoProvider({ children }) {
           crear,
           text,
           setText,
+          editar,
+          guardar,
+          valor,
+          setValor,
         }}
       >
         {children}

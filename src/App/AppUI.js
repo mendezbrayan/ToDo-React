@@ -24,7 +24,14 @@ const {loading,
   cerrar,
   crear,
   setText,
-  text
+  text,
+  editar,
+  guardar,
+  valor,
+  setValor,
+  todos,
+
+  
 
 
 } = useContext(TodoContext)
@@ -41,20 +48,27 @@ const {loading,
             <TodoList>
           {loading && <TodosLoading />}
           {error && <TodosError />}
-          {!loading && searchedTodos.length === 0 && <EmpityTodo />}
-
+          {todos.length === 0 && <EmpityTodo/> }
+          {todos.length > 0 && searchedTodos.length === 0 && <h1>no jadsfjas</h1>}
           {searchedTodos.map((todo) => (
             <TodoItem
+            onEditar={()=> editar(todo.id,todo.text)}
+            onGuardar={() => guardar(todo.id)}
+             setValor={setValor}
+             valor={valor}
               key={todo.text}
               text={todo.text}
               completd={todo.completd}
               onComplete={() => completeTodo(todo.id)}
               onDelete={() => deleteTodo(todo.id)}
               like={todo.like}
+              editar={todo.editar}
+              guardar={todo.guardar}
               onLikeMas={() => likeMas(todo.id)}
               onLikeMenos={() => likeMenos(todo.id)}
             />
           ))}
+
         </TodoList>
    
 
