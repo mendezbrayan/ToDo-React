@@ -87,6 +87,7 @@ function TodoProvider({ children }) {
     setOpenModal(false);
   };
   const editar = (id,text) => {
+    
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex((todo) => todo.id === id);
    newTodos[todoIndex].editar = true
@@ -99,12 +100,26 @@ function TodoProvider({ children }) {
   const guardar= (id) => {
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex((todo) => todo.id === id);
-    newTodos[todoIndex].editar = false
-      newTodos[todoIndex].text = valor
    
+    if(valor === ''){
+       newTodos[todoIndex].editar = false
+      
+    }else{
+       newTodos[todoIndex].editar = false
+  newTodos[todoIndex].guardar = false
+   newTodos[todoIndex].text = valor
+    }
  
-
+   
     saveTodos(newTodos);
+  }
+  const cancelar = (id) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.id === id);
+      newTodos[todoIndex].editar = false
+      saveTodos(newTodos);
+
+    
   }
 
   return (
@@ -133,6 +148,7 @@ function TodoProvider({ children }) {
           guardar,
           valor,
           setValor,
+          cancelar
         }}
       >
         {children}

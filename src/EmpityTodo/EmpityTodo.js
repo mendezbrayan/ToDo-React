@@ -3,10 +3,14 @@ function EmpityTodo (){
 
 
     return(
-       <div className='title' >
+      <div className='tamanio'>
+
+           <div className='title' >
          <h1 className='uno'>Crear un Todo
             </h1> 
        </div>
+      </div>
+     
     )
 }
 export {EmpityTodo}

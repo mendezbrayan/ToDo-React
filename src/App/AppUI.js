@@ -30,7 +30,7 @@ const {loading,
   valor,
   setValor,
   todos,
-
+cancelar
   
 
 
@@ -48,12 +48,13 @@ const {loading,
             <TodoList>
           {loading && <TodosLoading />}
           {error && <TodosError />}
-          {todos.length === 0 && <EmpityTodo/> }
+          {!loading && todos.length === 0 && <EmpityTodo/> }
           {todos.length > 0 && searchedTodos.length === 0 && <h1>no jadsfjas</h1>}
           {searchedTodos.map((todo) => (
             <TodoItem
             onEditar={()=> editar(todo.id,todo.text)}
-            onGuardar={() => guardar(todo.id)}
+            onGuardar={() => guardar(todo.id,todo.text)}
+            onCancelar = {() => cancelar(todo.id)}
              setValor={setValor}
              valor={valor}
               key={todo.text}
@@ -86,7 +87,7 @@ const {loading,
         <textarea
           type="text"
           className="input-field"
-          placeholder="Crear Todo"
+          placeholder="Crear un nuevo Todo"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />

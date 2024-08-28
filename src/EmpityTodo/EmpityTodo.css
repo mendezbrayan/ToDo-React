@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-
+.tamanio{
+	margin: 0;
+	padding: 0;
+	width: calc(100% -120px);
+	min-height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .title {
 	font-family: "Montserrat";
 	text-align: center;
@@ -14,8 +22,8 @@
 	        align-items: center;
 	-webkit-box-pack: center;
 	        justify-content: center;
-	height: 90px;
-	letter-spacing: 1px;
+	letter-spacing: 2px;
+	
 }
 
 .uno {
@@ -25,8 +33,8 @@
 	-moz-background-clip: text;
 	-webkit-background-clip: text;
 	text-transform: uppercase;
-	font-size: 80px;
-	line-height: .75;
+	font-size: 65px;
+	line-height: 1;
 	margin: 10px 0;
 }
 /* styling my button */
